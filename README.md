@@ -99,7 +99,7 @@ Copie a URL da tabela e a chave de API (`anon key`) para o `secrets.h`.
 
 ---
 
-## 🚀 Como usar
+## 🚀 Como usar 
 
 1. Clone este repositório
 2. Abra o arquivo `Estudo_DHT.ino` na Arduino IDE
