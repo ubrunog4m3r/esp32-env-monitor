@@ -1,0 +1,40 @@
+void lerHCSR04(){
+  const unsigned long intervaloHCSR04 = 100;
+  static unsigned long tempoHCSR04 = 0;
+
+  if(millis() - tempoHCSR04 >= intervaloHCSR04){
+    tempoHCSR04 = millis();
+
+    const float velocidadeDoSom = 0.017; // 0.034/2
+
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
+
+    unsigned long tempo = pulseIn(ECHO_PIN, HIGH, 10000);
+
+    if(tempo == 0){
+      distancia = -1;
+    }
+    else{
+      distancia = tempo * velocidadeDoSom;
+    }
+  }
+}
+
+void lerDHT(){
+  const unsigned long intervaloDHT = 2000;
+  static unsigned long tempoDHT = 0;
+
+  if(millis() - tempoDHT >= intervaloDHT){
+    tempoDHT = millis();
+    temperatura = dht.readTemperature();
+    umidade = dht.readHumidity();
+  }
+}
+
+void lerLDR(){
+  
+}
