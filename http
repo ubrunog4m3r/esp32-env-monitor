@@ -1,0 +1,31 @@
+void enviarDados(){
+  const unsigned long intervaloEnvio = 5000;
+  static unsigned long tempoEnvio = 0;
+
+  if(WiFi.status() == WL_CONNECTED){
+    if(millis() - tempoEnvio >= intervaloEnvio){
+      tempoEnvio = millis();
+
+      HTTPClient http;
+
+      http.begin(supabaseURL);
+      http.addHeader("Content-Type", "application/json");
+      http.addHeader("apikey", apiKey);
+      http.addHeader("Authorization", String("Bearer ") + apiKey);
+
+  // montar o JSON
+      String payload = "{\"temperatura\": " + String(temperatura) +
+                   ", \"umidade\": " + String(umidade) + "}";
+
+      int httpCode = http.POST(payload);
+
+      if(httpCode > 0){
+        Serial.println("Enviado! Código: " + String(httpCode));
+      }
+      else {
+        Serial.println("Erro: " + http.errorToString(httpCode));
+      }
+      http.end();
+    }
+  }
+}
