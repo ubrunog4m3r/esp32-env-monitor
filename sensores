@@ -36,5 +36,10 @@ void lerDHT(){
 }
 
 void lerLDR(){
-  
+  const unsigned long intervaloLDR = 5000;
+  static unsigned long tempoLDR = 0;
+  if(millis() - tempoLDR >= intervaloLDR){
+    tempoLDR = millis();
+    luminosidade = analogRead(LDR_PIN);
+  }  
 }
