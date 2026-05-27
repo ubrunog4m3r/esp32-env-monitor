@@ -12,6 +12,7 @@ const char* apiKey = API_KEY;
 #define BOTAO 13
 #define TRIG_PIN 26
 #define ECHO_PIN 27
+#define LDR_PIN 36
 #define LED_VERDE 21
 #define LED_VERMELHO 19
 #define DHT_PIN 23
@@ -22,6 +23,7 @@ DHT dht(DHT_PIN, DHT_TYPE);
 float distancia;
 float temperatura;
 float umidade;
+uint16_t luminosidade;
 
 bool estadoSistema = false;
 
@@ -43,6 +45,7 @@ void loop() {
   if(estadoSistema){
     lerHCSR04();
     lerDHT();
+    lerLDR();
     enviarDados();
   }
   monitorSerial();
